@@ -1,9 +1,36 @@
 {
-    "posts": [
-      { "id": 1, "title": "json-server", "author": "typicode" }
-    ],
-    "comments": [
-      { "id": 1, "body": "some comment", "postId": 1 }
-    ],
-    "profile": { "name": "typicode" }
+    "taks": [
+      { 
+        "id": 1, 
+        "userId": 1,
+        "name": "Complete Groceries Shopping",
+        "notes": "",
+        "remindDate": "15/08/2021 08:00"
+      },
+      { 
+        "id": 2, 
+        "userId": 2,
+        "name": "Car WOF",
+        "notes": "Once completed, re-new vehicle registration",
+        "remindDate": "10/09/2021"
+      }],
+    "users": [
+      { 
+        "id": "1",
+        "name": "John",
+        "email": "john@example.com",
+        "passphrase": "some passphrase",
+        "active": true,
+        "taskManagement": true,
+        "userManagement": true
+      },
+      { 
+        "id": "2",
+        "name": "Bob",
+        "email": "bob@example.com",
+        "passphrase": "some passphrase",
+        "active": true,
+        "taskManagement": true,
+        "userManagement": false
+      }]
   }
