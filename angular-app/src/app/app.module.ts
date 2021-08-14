@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -11,8 +11,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    RouterModule.forRoot([{
+        path: "tasks",
+        loadChildren: () => import("./tasks/task.module").then(m => m.TaskModule)
+      }, {
+        path: "users",
+        loadChildren: () => import("./users/user.module").then(m => m.UserModule)
+      }])
   ],
   providers: [],
   bootstrap: [AppComponent]
