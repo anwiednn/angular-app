@@ -11,7 +11,6 @@ export class TaskDetailViewModel_DetailModel {
 }
 
 export class TaskDetailViewModel_UserOptionModel {
-    public userId: number;
-    public firstName: string;
-    public lastName: string;
+    public id: number;
+    public name: string;
 }
