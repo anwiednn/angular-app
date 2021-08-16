@@ -10,6 +10,7 @@ import { TaskCreateModel } from './create/task-create-model';
 import { TaskCreateViewModel, TaskCreateViewModel_DetailModel, TaskCreateViewModel_UserOptionModel } from './create/task-create-view-model';
 import { TaskUpdateModel } from './detail/task-update-model';
 import { TaskDetailViewModel, TaskDetailViewModel_DetailModel, TaskDetailViewModel_UserOptionModel } from './detail/task-detail-view-model';
+import { TaskIndexViewModel, TaskIndexViewModel_PageModel, TaskIndexViewModel_PageModel_TaskModel, TaskIndexViewModel_PredicateModel } from './index/task-index-view-model';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -94,6 +95,51 @@ export class TaskService {
         userOptions: value.userOptions
       } as TaskDetailViewModel;
     }));
+  }
+
+  public getTaskIndexView() : Observable<TaskIndexViewModel> {
+    var queryOptions: string = `_page=1&_limit=25`;
+
+    return this.httpClient
+      .get<Task[]>(`${environment.apiBaseUrl}/tasks?${queryOptions}`, httpOptions)
+      .pipe(map(response => {
+        return {
+          predicate: {
+            pageNumber: 1,
+            pageSize: 25,
+            searchText: ""
+          } as TaskIndexViewModel_PredicateModel,
+          page: {
+            tasks: response.map(t => {
+              return {
+                name: t.name,
+                reminderDate: t.reminderDate
+              } as TaskIndexViewModel_PageModel_TaskModel
+            })
+          } as TaskIndexViewModel_PageModel
+        } as TaskIndexViewModel;
+      }));
+  }
+  
+  public getTaskIndexViewPage(predicateModel: TaskIndexViewModel_PredicateModel) : Observable<TaskIndexViewModel_PageModel> {
+    var queryOptions: string = `_page=${predicateModel.pageNumber}&_limit=${predicateModel.pageSize}`;
+    
+    if (!predicateModel.searchText) {
+      queryOptions += `&name_like=${predicateModel.searchText}`;
+    }
+    
+    return this.httpClient
+      .get<Task[]>(`${environment.apiBaseUrl}/tasks?${queryOptions}`, httpOptions)
+      .pipe(map(response => {
+        return {
+            tasks: response.map(t => {
+              return {
+                name: t.name,
+                reminderDate: t.reminderDate
+              } as TaskIndexViewModel_PageModel_TaskModel
+            })
+          } as TaskIndexViewModel_PageModel;
+      }));
   }
 
   public updateTask(id: number, updateModel: TaskUpdateModel) :Observable<number> {

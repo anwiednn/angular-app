@@ -4,12 +4,12 @@ export class TaskIndexViewModel {
 }
 
 export class TaskIndexViewModel_PredicateModel {
+    public pageNumber: number;
+    public pageSize: number;
     public searchText: string;
 }
 
 export class TaskIndexViewModel_PageModel {
-    public pageNumber: number;
-    public pageSize: number;
     public tasks: TaskIndexViewModel_PageModel_TaskModel[]
 }
 

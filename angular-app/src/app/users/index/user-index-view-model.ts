@@ -4,18 +4,17 @@ export class UserIndexViewModel {
 }
 
 export class UserIndexViewModel_PredicateModel {
+    public pageNumber: number;
+    public pageSize: number;
     public searchText: string;
-    public active: boolean;
+    public active: boolean | null;
 }
 
 export class UserIndexViewModel_PageModel {
-    public pageNumber: number;
-    public pageSize: number;
     public users: UserIndexViewModel_PageModel_UserModel[]
 }
 
 export class UserIndexViewModel_PageModel_UserModel {
-    public firstName: string;
-    public lastName: string;
     public active: boolean;
+    public name: string;
 }
