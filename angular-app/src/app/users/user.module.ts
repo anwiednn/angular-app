@@ -5,6 +5,7 @@ import { UserCreateComponent } from './create/user-create.component';
 import { UserDetailComponent } from './detail/user-detail.component';
 import { UserIndexComponent } from './index/user-index.component';
 import { UserEmailAvailableDirectiveDirective } from './shared/user-email-available-directive.directive';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,18 @@ import { UserEmailAvailableDirectiveDirective } from './shared/user-email-availa
     UserEmailAvailableDirectiveDirective
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule.forChild([{
+        path: "",
+        component: UserIndexComponent,
+        children: [{
+          path: "create",
+          component: UserCreateComponent
+        }, {
+          path: "detail/:id",
+          component: UserDetailComponent
+        }]
+    }])
   ],
   providers: [
     UserService
