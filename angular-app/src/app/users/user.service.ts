@@ -18,6 +18,20 @@ const httpOptions = {
 export class UserService {
   constructor(private httpClient: HttpClient) {
   }
+  
+  public checkEmaiAvailable(id: number | null, email: string) : Observable<boolean> {
+    var queryOptions: string = `_page=1&_limit=25&email=${email}`;
+  
+    if (id != null) {
+      queryOptions += `&id_ne=${id}`;
+    }
+
+    return this.httpClient
+      .get<User[]>(`${environment.apiBaseUrl}/users?${queryOptions}`, httpOptions)
+      .pipe(map(response => {
+        return response?.length == 0;
+      }));
+  }
 
   public createUser(createModel: UserCreateModel) : Observable<number> {
     var createUser = {
