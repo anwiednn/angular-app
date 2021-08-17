@@ -5,6 +5,7 @@ import { TaskCreateComponent } from './create/task-create.component';
 import { TaskDetailComponent } from './detail/task-detail.component';
 import { TaskIndexComponent } from './index/task-index.component';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     CommonModule,
+    HttpClientModule,
     RouterModule.forChild([{
         path: "",
         component: TaskIndexComponent,

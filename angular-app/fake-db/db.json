@@ -19,18 +19,12 @@
         "id": 1,
         "name": "John",
         "email": "john@example.com",
-        "passphrase": "some passphrase",
-        "active": true,
-        "taskManagement": true,
-        "userManagement": true
+        "active": true
       },
       { 
         "id": 2,
         "name": "Bob",
         "email": "bob@example.com",
-        "passphrase": "some passphrase",
-        "active": true,
-        "taskManagement": true,
-        "userManagement": false
+        "active": true
       }]
   }

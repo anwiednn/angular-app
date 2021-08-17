@@ -5,6 +5,10 @@ import { UserCreateComponent } from './create/user-create.component';
 import { UserDetailComponent } from './detail/user-detail.component';
 import { UserIndexComponent } from './index/user-index.component';
 import { UserEmailAvailableDirectiveDirective } from './shared/user-email-available-directive.directive';
+import { HttpClientModule } from '@angular/common/http';
+import { MatCardModule } from '@angular/material/card';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
@@ -16,6 +20,10 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     CommonModule,
+    HttpClientModule,
+    MatCardModule,
+    MatTableModule,
+    MatPaginatorModule,
     RouterModule.forChild([{
         path: "",
         component: UserIndexComponent,

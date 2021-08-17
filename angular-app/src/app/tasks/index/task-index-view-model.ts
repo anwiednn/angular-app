@@ -6,7 +6,7 @@ export class TaskIndexViewModel {
 export class TaskIndexViewModel_PredicateModel {
     public pageNumber: number;
     public pageSize: number;
-    public searchText: string;
+    public searchText: string | null;
 }
 
 export class TaskIndexViewModel_PageModel {

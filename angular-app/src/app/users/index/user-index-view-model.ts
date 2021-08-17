@@ -6,15 +6,17 @@ export class UserIndexViewModel {
 export class UserIndexViewModel_PredicateModel {
     public pageNumber: number;
     public pageSize: number;
-    public searchText: string;
+    public searchText: string | null;
     public active: boolean | null;
 }
 
 export class UserIndexViewModel_PageModel {
+    public total: number;
     public users: UserIndexViewModel_PageModel_UserModel[]
 }
 
 export class UserIndexViewModel_PageModel_UserModel {
     public active: boolean;
     public name: string;
+    public email: string;
 }

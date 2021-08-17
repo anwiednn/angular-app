@@ -47,67 +47,67 @@ export class TaskService {
       {
         taskCreateView: of(new TaskCreateViewModel_DetailModel()),
         userOptions: this.httpClient
-        .get<User[]>(`${environment.apiBaseUrl}/users`, httpOptions)
-        .pipe(map(response => {
-          return response.map<TaskCreateViewModel_UserOptionModel>(u => {
-            return { 
-              id: u.id,
-              name: u.name
-            } as TaskCreateViewModel_UserOptionModel;
-          });
-        })),
-      }
-    ).pipe(map(value => {
-      return {
-        detail: value.taskCreateView,
-        userOptions: value.userOptions
-      } as TaskCreateViewModel;
-    }));
+          .get<User[]>(`${environment.apiBaseUrl}/users`, httpOptions)
+          .pipe(map(response => {
+            return response.map<TaskCreateViewModel_UserOptionModel>(u => {
+              return { 
+                id: u.id,
+                name: u.name
+              } as TaskCreateViewModel_UserOptionModel;
+            });
+          })),
+      })
+      .pipe(map(value => {
+        return {
+          detail: value.taskCreateView,
+          userOptions: value.userOptions
+        } as TaskCreateViewModel;
+      }));
   }
 
   public getTaskDetailView(id: number): Observable<TaskDetailViewModel> {
     return forkJoin(
       {
         taskDetailView: this.httpClient
-        .get<Task>(`${environment.apiBaseUrl}/tasks/${id}`, httpOptions)
-        .pipe(map(task => {
-          return {
-              userId: task.userId,
-              name: task.name,
-              notes: task.notes,
-              reminderDate: task.reminderDate
-            } as TaskDetailViewModel_DetailModel;
-        })),
+          .get<Task>(`${environment.apiBaseUrl}/tasks/${id}`, httpOptions)
+          .pipe(map(task => {
+            return {
+                userId: task.userId,
+                name: task.name,
+                notes: task.notes,
+                reminderDate: task.reminderDate
+              } as TaskDetailViewModel_DetailModel;
+          })),
         userOptions: this.httpClient
-        .get<User[]>(`${environment.apiBaseUrl}/users`, httpOptions)
-        .pipe(map(response => {
-          return response.map<TaskDetailViewModel_UserOptionModel>(u => {
-            return { 
-              id: u.id,
-              name: u.name
-            } as TaskDetailViewModel_UserOptionModel;
-          });
-        })),
-      }
-    ).pipe(map(value => {
-      return {
-        detail: value.taskDetailView,
-        userOptions: value.userOptions
-      } as TaskDetailViewModel;
-    }));
+          .get<User[]>(`${environment.apiBaseUrl}/users`, httpOptions)
+          .pipe(map(response => {
+            return response.map<TaskDetailViewModel_UserOptionModel>(u => {
+              return { 
+                id: u.id,
+                name: u.name
+              } as TaskDetailViewModel_UserOptionModel;
+            });
+          }))
+      })
+      .pipe(map(value => {
+        return {
+          detail: value.taskDetailView,
+          userOptions: value.userOptions
+        } as TaskDetailViewModel;
+      }));
   }
 
   public getTaskIndexView() : Observable<TaskIndexViewModel> {
-    var queryOptions: string = `_page=1&_limit=25`;
+    var queryOptions: string = `_page=1&_limit=9999`;
 
     return this.httpClient
       .get<Task[]>(`${environment.apiBaseUrl}/tasks?${queryOptions}`, httpOptions)
       .pipe(map(response => {
         return {
           predicate: {
-            pageNumber: 1,
+            pageNumber: 0,
             pageSize: 25,
-            searchText: ""
+            searchText: null
           } as TaskIndexViewModel_PredicateModel,
           page: {
             tasks: response.map(t => {
@@ -122,23 +122,35 @@ export class TaskService {
   }
   
   public getTaskIndexViewPage(predicateModel: TaskIndexViewModel_PredicateModel) : Observable<TaskIndexViewModel_PageModel> {
-    var queryOptions: string = `_page=${predicateModel.pageNumber}&_limit=${predicateModel.pageSize}`;
-    
-    if (!predicateModel.searchText) {
+    var pagingOptions: string = `_page=${predicateModel.pageNumber+1}&_limit=${predicateModel.pageSize}`;
+    var queryOptions: string = ``;
+
+    if (predicateModel.searchText) {
       queryOptions += `&name_like=${predicateModel.searchText}`;
     }
-    
-    return this.httpClient
-      .get<Task[]>(`${environment.apiBaseUrl}/tasks?${queryOptions}`, httpOptions)
-      .pipe(map(response => {
+
+    return forkJoin({
+      totalTasks: this.httpClient
+        .get<Task[]>(`${environment.apiBaseUrl}/tasks?_limit=9999${queryOptions}`, httpOptions)
+        .pipe(map(response => {
+          return response.length
+        })),
+      tasks:  this.httpClient
+        .get<Task[]>(`${environment.apiBaseUrl}/tasks?${pagingOptions}${queryOptions}`, httpOptions)
+        .pipe(map(response => {
+          return response.map(t => {
+                return {
+                  name: t.name,
+                  reminderDate: t.reminderDate
+                } as TaskIndexViewModel_PageModel_TaskModel
+              });
+        }))
+      })
+      .pipe(map(value => {
         return {
-            tasks: response.map(t => {
-              return {
-                name: t.name,
-                reminderDate: t.reminderDate
-              } as TaskIndexViewModel_PageModel_TaskModel
-            })
-          } as TaskIndexViewModel_PageModel;
+          total: value.totalTasks,
+          tasks: value.tasks
+        } as TaskIndexViewModel_PageModel;
       }));
   }
 
