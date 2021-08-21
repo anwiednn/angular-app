@@ -42,10 +42,10 @@ export class TaskService {
       .pipe(map(() => {}));
   }
 
-  public getTaskCreateView(id: number): Observable<TaskCreateViewModel> {
+  public getTaskCreateView(): Observable<TaskCreateViewModel> {
     return forkJoin(
       {
-        taskCreateView: of(new TaskCreateViewModel_DetailModel()),
+        taskDetailView: of(new TaskCreateViewModel_DetailModel()),
         userOptions: this.httpClient
           .get<User[]>(`${environment.apiBaseUrl}/users`, httpOptions)
           .pipe(map(response => {
@@ -59,7 +59,7 @@ export class TaskService {
       })
       .pipe(map(value => {
         return {
-          detail: value.taskCreateView,
+          detail: value.taskDetailView,
           userOptions: value.userOptions
         } as TaskCreateViewModel;
       }));
@@ -91,6 +91,7 @@ export class TaskService {
       })
       .pipe(map(value => {
         return {
+          id: id,
           detail: value.taskDetailView,
           userOptions: value.userOptions
         } as TaskDetailViewModel;
@@ -112,6 +113,7 @@ export class TaskService {
           page: {
             tasks: response.map(t => {
               return {
+                id: t.id,
                 name: t.name,
                 reminderDate: t.reminderDate
               } as TaskIndexViewModel_PageModel_TaskModel
@@ -140,6 +142,7 @@ export class TaskService {
         .pipe(map(response => {
           return response.map(t => {
                 return {
+                  id: t.id,
                   name: t.name,
                   reminderDate: t.reminderDate
                 } as TaskIndexViewModel_PageModel_TaskModel

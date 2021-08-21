@@ -38,6 +38,9 @@ export class UserIndexComponent implements OnInit {
     .afterClosed()
     .subscribe(result => {
       if (result) {
+        this.snackBar.open('User Created', "", {
+          duration: 3000
+        });
         this.setViewModelPage();
       }
     });
@@ -55,6 +58,9 @@ export class UserIndexComponent implements OnInit {
     .afterClosed()
     .subscribe(result => {
       if (result) {
+        this.snackBar.open('User Updated', "", {
+          duration: 3000
+        });
         this.setViewModelPage();
       }
     });

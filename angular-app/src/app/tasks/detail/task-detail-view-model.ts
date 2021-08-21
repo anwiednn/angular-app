@@ -1,4 +1,5 @@
 export class TaskDetailViewModel {
+    public id: number;
     public detail: TaskDetailViewModel_DetailModel;
     public userOptions: TaskDetailViewModel_UserOptionModel[];
 }

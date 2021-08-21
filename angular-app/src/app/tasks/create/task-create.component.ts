@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TaskService } from '../task.service';
+import { TaskCreateViewModel } from './task-create-view-model';
 
 @Component({
   selector: 'app-task-create',
@@ -6,10 +8,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./task-create.component.scss']
 })
 export class TaskCreateComponent implements OnInit {
+  public viewModel: TaskCreateViewModel;
 
-  constructor() { }
+  constructor(private taskService: TaskService) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
+    this.setViewModel();
+  }
+
+  public createTaskClicked(): void {
+
+  }
+
+  private setViewModel(): void {
+    this.taskService
+    .getTaskCreateView()
+    .subscribe(viewModel => {
+      this.viewModel = viewModel;
+    });
   }
 
 }

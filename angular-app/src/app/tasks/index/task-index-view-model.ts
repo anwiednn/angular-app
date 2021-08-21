@@ -14,6 +14,7 @@ export class TaskIndexViewModel_PageModel {
 }
 
 export class TaskIndexViewModel_PageModel_TaskModel {
+    public id: number;
     public name: string;
     public reminderDate: Date;
 }
