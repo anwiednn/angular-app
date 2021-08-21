@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserCreateComponent } from '../create/user-create.component';
 import { UserService } from '../user.service';
 import { UserIndexViewModel } from './user-index-view-model';
 
@@ -13,15 +16,30 @@ export class UserIndexComponent implements OnInit {
     'name', 
     'email', 
     'active', 
-    'action'
+    'actions'
   ];
-  public pageSizeOptions: number[] = [5, 10, 25, 100];
   public viewModel: UserIndexViewModel;
 
-  constructor(private userService: UserService) { }
+  constructor(private dialog: MatDialog,
+    private snackBar: MatSnackBar, 
+    private userService: UserService) { }
 
   public ngOnInit(): void {
     this.setViewModel();
+  }
+
+  public createUserClicked(): void {    
+    this.dialog
+    .open(UserCreateComponent, {
+      disableClose: true,
+      width: '250px'
+    })
+    .afterClosed()
+    .subscribe(result => {
+      if (result) {
+        this.setViewModelPage();
+      }
+    });
   }
 
   public pageChanged(event : PageEvent) : void {

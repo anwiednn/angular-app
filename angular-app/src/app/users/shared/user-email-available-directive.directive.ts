@@ -5,15 +5,15 @@ import { debounceTime, map, startWith } from "rxjs/operators"
 import { UserService } from '../user.service';
 
 @Directive({
-  selector: '[userEmailAvailableDirective]',
+  selector: '[userEmailAvailable]',
   providers: [{
     provide: NG_ASYNC_VALIDATORS, 
     useExisting: UserEmailAvailableDirectiveDirective, 
     multi: true}]
 })
 export class UserEmailAvailableDirectiveDirective implements AsyncValidator  {
-  @Input("userEmailAvailableDirective") id: number | null;
-
+  @Input("userEmailAvailable") id: number | null;
+  
   constructor(private userService: UserService) {
   }
 

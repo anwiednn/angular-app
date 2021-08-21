@@ -10,6 +10,14 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { RouterModule } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -18,22 +26,34 @@ import { RouterModule } from '@angular/router';
     UserIndexComponent,
     UserEmailAvailableDirectiveDirective
   ],
+  entryComponents: [
+    UserCreateComponent,
+    UserDetailComponent    
+  ],
   imports: [
     CommonModule,
+    FormsModule,
     HttpClientModule,
+    MatButtonModule,
     MatCardModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
     MatTableModule,
     MatPaginatorModule,
+    MatSnackBarModule,
+    MatSlideToggleModule,
     RouterModule.forChild([{
         path: "",
         component: UserIndexComponent,
-        children: [{
-          path: "create",
-          component: UserCreateComponent
-        }, {
-          path: "detail/:id",
-          component: UserDetailComponent
-        }]
+        // children: [{
+        //   path: "create",
+        //   component: UserCreateComponent
+        // }, {
+        //   path: "detail/:id",
+        //   component: UserDetailComponent
+        // }]
     }])
   ],
   providers: [

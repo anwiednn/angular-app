@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
+import { UserService } from '../user.service';
+import { UserCreateModel } from './user-create-model';
+import { UserCreateViewModel, UserCreateViewModel_DetailModel } from './user-create-view-model';
 
 @Component({
   selector: 'app-user-create',
@@ -6,10 +10,33 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-create.component.scss']
 })
 export class UserCreateComponent implements OnInit {
+  public viewModel: UserCreateViewModel;
 
-  constructor() { }
+  constructor(
+    private dialogRef: MatDialogRef<UserCreateComponent>,
+    private userSerivce: UserService) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
+    this.viewModel = new UserCreateViewModel();
+    this.viewModel.detail = new UserCreateViewModel_DetailModel()
+    this.viewModel.detail.active= true;
   }
 
+  public cancelClicked(): void {
+    this.dialogRef.close(false);
+  }
+
+  public createUserClicked(): void {
+    var createModel = {
+      name: this.viewModel.detail.name,
+      email: this.viewModel.detail.email,
+      active: this.viewModel.detail.active
+    } as UserCreateModel;
+
+    this.userSerivce
+      .createUser(createModel)
+      .subscribe(() => {
+        this.dialogRef.close(true);    
+      });
+  }
 }
