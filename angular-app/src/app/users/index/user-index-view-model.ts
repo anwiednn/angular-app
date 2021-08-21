@@ -16,6 +16,7 @@ export class UserIndexViewModel_PageModel {
 }
 
 export class UserIndexViewModel_PageModel_UserModel {
+    public id: number;
     public active: boolean;
     public name: string;
     public email: string;

@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserCreateComponent } from '../create/user-create.component';
+import { UserDetailComponent } from '../detail/user-detail.component';
 import { UserService } from '../user.service';
 import { UserIndexViewModel } from './user-index-view-model';
 
@@ -31,6 +32,23 @@ export class UserIndexComponent implements OnInit {
   public createUserClicked(): void {    
     this.dialog
     .open(UserCreateComponent, {
+      disableClose: true,
+      width: '250px'
+    })
+    .afterClosed()
+    .subscribe(result => {
+      if (result) {
+        this.setViewModelPage();
+      }
+    });
+  }
+
+  public detailUserClicked(id: number): void {
+    this.dialog
+    .open(UserDetailComponent, {
+      data: { 
+        userId: id 
+      },
       disableClose: true,
       width: '250px'
     })

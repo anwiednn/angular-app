@@ -1,1 +1,44 @@
-<p>user-detail works!</p>
+<ng-container *ngIf="viewModel">
+    <h2 mat-dialog-title>
+        Update User
+    </h2>
+    <mat-dialog-content fxFlex>
+        <form #formUpdateUser="ngForm">
+            <div>
+                <mat-form-field>
+                    <mat-label>Name</mat-label>
+                    <input matInput placeholder="Enter your name..." #name="ngModel"
+                        [(ngModel)]="viewModel.detail.name"
+                        name="name"
+                        required maxlength="50">
+                    <mat-error *ngIf="name?.errors?.required">Required</mat-error>
+                    <mat-error *ngIf="name?.errors?.maxlength">Max lenght 50</mat-error>
+                </mat-form-field>                
+            </div>
+            <div>
+                <mat-form-field>
+                    <mat-label>Email</mat-label>
+                    <input matInput placeholder="Enter your email..." #email="ngModel"
+                        [(ngModel)]="viewModel.detail.email"
+                        name="email"
+                        required email maxlength="255" [userEmailAvailable]="viewModel.id">
+                    <mat-error *ngIf="email?.errors?.required">Required</mat-error>
+                    <mat-error *ngIf="email?.errors?.email">Invalid email</mat-error>
+                    <mat-error *ngIf="email?.errors?.maxlength">Max lenght 50</mat-error>
+                    <mat-error *ngIf="email?.errors?.userEmailAvailable">Email already used</mat-error>
+                </mat-form-field>                
+            </div>
+            <div>
+                <mat-slide-toggle [(ngModel)]="viewModel.detail.active" 
+                    name="acive">Active</mat-slide-toggle>                
+            </div>
+        </form>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-button
+            (click)="cancelClicked()">Cancel</button>
+      <button mat-button
+            [disabled]="formUpdateUser.invalid"
+            (click)="updateUserClicked()">Update</button>
+    </mat-dialog-actions>    
+</ng-container>

@@ -1,4 +1,5 @@
 export class UserDetailViewModel {
+    public id: number;
     public detail: UserDetailViewModel_DetailModel;
 }
 

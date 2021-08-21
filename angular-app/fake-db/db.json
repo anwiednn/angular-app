@@ -29,10 +29,10 @@
       "active": true
     },
     {
-      "name": "Andreas",
+      "id": 3,
+      "name": "Andreas2",
       "email": "andreas@example.com",
-      "active": true,
-      "id": 3
+      "active": true
     }
   ]
 }

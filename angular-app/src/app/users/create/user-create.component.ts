@@ -14,7 +14,7 @@ export class UserCreateComponent implements OnInit {
 
   constructor(
     private dialogRef: MatDialogRef<UserCreateComponent>,
-    private userSerivce: UserService) { }
+    private userService: UserService) { }
 
   public ngOnInit(): void {
     this.viewModel = new UserCreateViewModel();
@@ -33,7 +33,7 @@ export class UserCreateComponent implements OnInit {
       active: this.viewModel.detail.active
     } as UserCreateModel;
 
-    this.userSerivce
+    this.userService
       .createUser(createModel)
       .subscribe(() => {
         this.dialogRef.close(true);    

@@ -7,6 +7,7 @@ import { User } from 'fake-db/user';
 import { UserCreateModel } from './create/user-create-model';
 import { UserUpdateModel } from './detail/user-update-model';
 import { UserIndexViewModel, UserIndexViewModel_PageModel, UserIndexViewModel_PageModel_UserModel, UserIndexViewModel_PredicateModel } from './index/user-index-view-model';
+import { UserDetailViewModel, UserDetailViewModel_DetailModel } from './detail/user-detail-view-model';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -45,6 +46,21 @@ export class UserService {
       .pipe(map(response => response.id));
   }
 
+  public getUserDetailView(id: number) : Observable<UserDetailViewModel> {
+    return this.httpClient
+      .get<User>(`${environment.apiBaseUrl}/users/${id}`, httpOptions)
+      .pipe(map(response => {
+        return {
+          id: response.id,
+          detail: {
+            name: response.name,
+            email: response.email,
+            active: response.active
+          } as UserDetailViewModel_DetailModel
+        } as UserDetailViewModel;
+      }));
+  }
+
   public getUserIndexView() : Observable<UserIndexViewModel> {
     var pagingOptions: string = `_page=1&_limit=9999`;
     var queryOptions: string = `&active=true`;
@@ -63,9 +79,10 @@ export class UserService {
             total: response.length,
             users: response.map(u => {
               return {
-                active: u.active,
+                id: u.id,
                 name: u.name,
-                email: u.email
+                email: u.email,
+                active: u.active
               } as UserIndexViewModel_PageModel_UserModel
             })
           } as UserIndexViewModel_PageModel
@@ -97,9 +114,10 @@ export class UserService {
         .pipe(map(response => {
           return response.map(u => {
                 return {
-                  active: u.active,
+                  id: u.id,
                   name: u.name,
-                  email: u.email
+                  email: u.email,
+                  active: u.active
                 } as UserIndexViewModel_PageModel_UserModel
               });
         }))
