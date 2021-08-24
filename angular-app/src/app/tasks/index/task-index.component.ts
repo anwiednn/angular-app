@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DialogConfirmComponent } from 'src/app/shared/dialog/dialog-confirm.component';
 import { TaskService } from '../task.service';
 import { TaskIndexViewModel } from './task-index-view-model';
 
@@ -13,6 +15,7 @@ export class TaskIndexComponent implements OnInit {
   public viewModel: TaskIndexViewModel;
 
   constructor(private taskService: TaskService,
+    private dialog: MatDialog,
     private snackBar: MatSnackBar) {
   }
 
@@ -22,13 +25,21 @@ export class TaskIndexComponent implements OnInit {
 
   public deleteTaskClicked(taskId: number, event: Event): void {
     event.preventDefault();
-    this.taskService
-      .deleteTask(taskId)
-      .subscribe(() => {
-        this.setViewModel();
-        this.snackBar.open('Task Deleted', "", {
-          duration: 3000
-        });
+
+    this.dialog
+      .open(DialogConfirmComponent)
+      .afterClosed()
+      .subscribe((result: Boolean) => {
+        if (result) {
+          this.taskService
+            .deleteTask(taskId)
+            .subscribe(() => {
+              this.setViewModel();
+              this.snackBar.open('Task Deleted', "", {
+                duration: 3000
+              });
+            });
+        }
       });
   }
   
