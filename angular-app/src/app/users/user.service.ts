@@ -93,7 +93,7 @@ export class UserService {
   public getUserIndexViewPage(predicateModel: UserIndexViewModel_PredicateModel) : Observable<UserIndexViewModel_PageModel> {
     var pagingOptions: string = `_page=${predicateModel.pageNumber+1}&_limit=${predicateModel.pageSize}`;
     var queryOptions: string = ``;
-
+    
     if (predicateModel.active != null) {
       queryOptions += `&active=${predicateModel.active}`;
     }

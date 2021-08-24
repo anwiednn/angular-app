@@ -18,6 +18,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatPaginatorModule,
     MatSnackBarModule,
     MatSlideToggleModule,
+    MatSelectModule,
     RouterModule.forChild([{
         path: "",
         component: UserIndexComponent,

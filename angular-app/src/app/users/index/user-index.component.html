@@ -5,7 +5,21 @@
         </mat-card-content>
     </mat-card>
     <mat-card>
-        <mat-card-content>
+        <mat-card-content>            
+            <mat-form-field>
+                <input matInput placeholder="Search..."
+                    [(ngModel)]="viewModel.predicate.searchText"
+                    (keydown.enter)="searchChanged()"
+                    name="searchText">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-select [(ngModel)]="viewModel.predicate.active"
+                            (selectionChange)="searchChanged()">
+                    <mat-option>Any</mat-option>
+                    <mat-option value="true">Active</mat-option>
+                    <mat-option value="false">Inactive</mat-option>
+                </mat-select>
+            </mat-form-field>
             <table mat-table [dataSource]="viewModel.page.users">
                 <ng-container matColumnDef="name">
                     <th mat-header-cell *matHeaderCellDef>Name</th>

@@ -4,6 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -20,6 +21,7 @@ import { RouterModule } from '@angular/router';
     MatIconModule,
     MatToolbarModule,
     MatSidenavModule,
+    MatMomentDateModule,
     RouterModule.forRoot([{
         path: "tasks",
         loadChildren: () => import("./tasks/task.module").then(m => m.TaskModule)

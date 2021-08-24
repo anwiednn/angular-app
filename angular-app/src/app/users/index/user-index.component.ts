@@ -73,6 +73,10 @@ export class UserIndexComponent implements OnInit {
     this.setViewModelPage();
   }
 
+  public searchChanged(): void {
+    this.setViewModelPage();
+  }
+
   private setViewModel() : void {
     this.userService
       .getUserIndexView()
