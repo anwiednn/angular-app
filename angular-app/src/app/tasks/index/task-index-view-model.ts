@@ -10,11 +10,13 @@ export class TaskIndexViewModel_PredicateModel {
 }
 
 export class TaskIndexViewModel_PageModel {
+    public total: number;
     public tasks: TaskIndexViewModel_PageModel_TaskModel[]
 }
 
 export class TaskIndexViewModel_PageModel_TaskModel {
     public id: number;
     public name: string;
+    public notes: string;
     public reminderDate: Date;
 }

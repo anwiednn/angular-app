@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskService } from '../task.service';
+import { TaskCreateModel } from './task-create-model';
 import { TaskCreateViewModel } from './task-create-view-model';
 
 @Component({
@@ -17,7 +18,17 @@ export class TaskCreateComponent implements OnInit {
   }
 
   public createTaskClicked(): void {
+    var createModel = {
+      userId: this.viewModel.detail.userId,
+      name: this.viewModel.detail.name,
+      notes: this.viewModel.detail.notes,
+      reminderDate: this.viewModel.detail.reminderDate
+    } as TaskCreateModel;
 
+    this.taskService
+    .createTask(createModel)
+    .subscribe(taskId => {
+    });
   }
 
   private setViewModel(): void {

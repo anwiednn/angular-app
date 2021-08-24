@@ -1,4 +1,5 @@
-<form #formCreateTask="ngForm">
+<form #formCreateTask="ngForm"
+*ngIf="viewModel">
     <div>
         <mat-form-field>
             <mat-label>Name</mat-label>
@@ -37,7 +38,7 @@
             <mat-select 
                 [(ngModel)]="viewModel.detail.userId" #userId="ngModel"
                 name="userId"
-                required>>
+                required>
                 <mat-option *ngFor="let userOption of viewModel.userOptions" 
                     [value]="userOption.id">
                     {{userOption.name}}

@@ -1,2 +1,40 @@
-<p>task-index works!</p>
-<router-outlet></router-outlet>
+<ng-container *ngIf="viewModel">
+    <mat-card>
+        <mat-card-content>
+            Search
+        </mat-card-content>
+    </mat-card>
+    <mat-card>
+        <mat-card-content>
+            <mat-form-field>
+                <input matInput placeholder="Search..."
+                    [(ngModel)]="viewModel.predicate.searchText"
+                    (keydown.enter)="searchChanged()"
+                    name="searchText">
+            </mat-form-field>
+            <button mat-mini-fab
+                    routerLink="create">
+                <mat-icon>add</mat-icon>
+            </button>
+            <router-outlet></router-outlet>
+            <mat-card *ngFor="let task of viewModel.page.tasks"
+                    [routerLink]="['detail', task.id]">
+                <mat-card-header>
+                    {{task.name}}
+                    {{task.reminderDate | date}}
+                </mat-card-header>
+                <mat-card-content>
+                </mat-card-content>
+            </mat-card>
+        </mat-card-content>
+        <mat-card-actions>
+            <mat-paginator 
+                [length]="viewModel.page.total"
+                [pageIndex]="viewModel.predicate.pageNumber"
+                [pageSize]="viewModel.predicate.pageSize"
+                [pageSizeOptions]="[1, 5, 10, 25, 100]"
+                (page)="pageChanged($event)">
+            </mat-paginator>
+        </mat-card-actions>
+    </mat-card>
+</ng-container>

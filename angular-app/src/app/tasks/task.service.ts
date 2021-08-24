@@ -115,6 +115,7 @@ export class TaskService {
               return {
                 id: t.id,
                 name: t.name,
+                notes: t.notes,
                 reminderDate: t.reminderDate
               } as TaskIndexViewModel_PageModel_TaskModel
             })
@@ -144,6 +145,7 @@ export class TaskService {
                 return {
                   id: t.id,
                   name: t.name,
+                  notes: t.notes,
                   reminderDate: t.reminderDate
                 } as TaskIndexViewModel_PageModel_TaskModel
               });
