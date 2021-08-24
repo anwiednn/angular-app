@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { AppEventChangeType } from 'src/app/appEvent/app-event-changed-model';
+import { AppEventService } from 'src/app/appEvent/app-event.service';
 import { TaskService } from '../task.service';
 import { TaskDetailViewModel } from './task-detail-view-model';
 import { TaskUpdateModel } from './task-update-model';
@@ -12,9 +15,13 @@ import { TaskUpdateModel } from './task-update-model';
 })
 export class TaskDetailComponent implements OnInit {
   public viewModel: TaskDetailViewModel;
+  
   private taskId: number;
+  private taskChangedSubscription: Subscription;
 
-  constructor(private taskService: TaskService,
+  constructor(
+    private appEventService: AppEventService,
+    private taskService: TaskService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private snackBar: MatSnackBar) { }
@@ -25,7 +32,25 @@ export class TaskDetailComponent implements OnInit {
         this.taskId = params.id;
         this.setViewModel();
       });
-  }
+    
+      this.taskChangedSubscription = this.appEventService
+        .taskChanged
+        .subscribe(model => {
+          if (model.id == this.taskId) {     
+            if (model.type == AppEventChangeType.Delete) {
+              this.router.navigate(["../.."], {
+                relativeTo: this.activatedRoute
+              });
+            } else {
+              this.setViewModel();
+            }      
+          }
+        })
+    }
+  
+    public ngOnDestroy(): void {
+      this.taskChangedSubscription.unsubscribe();
+    }
 
   public cancelClicked(): void {
     this.router.navigate(["../.."], {
@@ -44,6 +69,10 @@ export class TaskDetailComponent implements OnInit {
     this.taskService
       .updateTask(this.taskId, updateModel)
       .subscribe(() => {
+        this.appEventService.taskChanged.next({
+          id: this.taskId,
+          type: AppEventChangeType.Create
+        });
         this.router.navigate(["../.."], {
           relativeTo: this.activatedRoute
         });

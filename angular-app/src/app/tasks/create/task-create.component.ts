@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AppEventChangedModel, AppEventChangeType } from 'src/app/appEvent/app-event-changed-model';
+import { AppEventService } from 'src/app/appEvent/app-event.service';
 import { TaskService } from '../task.service';
 import { TaskCreateModel } from './task-create-model';
 import { TaskCreateViewModel } from './task-create-view-model';
@@ -13,7 +15,9 @@ import { TaskCreateViewModel } from './task-create-view-model';
 export class TaskCreateComponent implements OnInit {
   public viewModel: TaskCreateViewModel;
 
-  constructor(private taskService: TaskService,
+  constructor(
+    private appEventService: AppEventService,
+    private taskService: TaskService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private snackBar: MatSnackBar) { }
@@ -39,6 +43,10 @@ export class TaskCreateComponent implements OnInit {
     this.taskService
       .createTask(createModel)
       .subscribe(taskId => {
+        this.appEventService.taskChanged.next({
+          id: taskId,
+          type: AppEventChangeType.Create
+        });
         this.router.navigate(["../"], {
           relativeTo: this.activatedRoute
         });

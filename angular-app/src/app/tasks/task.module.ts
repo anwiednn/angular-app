@@ -17,6 +17,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SharedModule } from '../shared/shared.module';
+import { AppEventService } from '../appEvent/app-event.service';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { SharedModule } from '../shared/shared.module';
     }])
   ],
   providers: [
+    AppEventService,
     TaskService
   ]
 })

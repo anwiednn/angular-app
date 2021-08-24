@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subscription } from 'rxjs';
+import { AppEventChangeType } from 'src/app/appEvent/app-event-changed-model';
+import { AppEventService } from 'src/app/appEvent/app-event.service';
 import { DialogConfirmComponent } from 'src/app/shared/dialog/dialog-confirm.component';
 import { TaskService } from '../task.service';
 import { TaskIndexViewModel } from './task-index-view-model';
@@ -11,16 +14,30 @@ import { TaskIndexViewModel } from './task-index-view-model';
   templateUrl: './task-index.component.html',
   styleUrls: ['./task-index.component.scss']
 })
-export class TaskIndexComponent implements OnInit {
+export class TaskIndexComponent implements OnInit, OnDestroy {
   public viewModel: TaskIndexViewModel;
 
-  constructor(private taskService: TaskService,
+  private taskChangedSubscription: Subscription;
+
+  constructor(
+    private appEventService: AppEventService,
+    private taskService: TaskService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar) {
   }
 
   public ngOnInit(): void {
     this.setViewModel();
+    
+    this.taskChangedSubscription = this.appEventService
+      .taskChanged
+      .subscribe(() => {
+        this.setViewModel();
+      })
+  }
+
+  public ngOnDestroy(): void {
+    this.taskChangedSubscription.unsubscribe();
   }
 
   public deleteTaskClicked(taskId: number, event: Event): void {
@@ -34,10 +51,14 @@ export class TaskIndexComponent implements OnInit {
           this.taskService
             .deleteTask(taskId)
             .subscribe(() => {
-              this.setViewModel();
+              this.appEventService.taskChanged.next({
+                id: taskId,
+                type: AppEventChangeType.Delete
+              });
               this.snackBar.open('Task Deleted', "", {
                 duration: 3000
               });
+              this.setViewModel();
             });
         }
       });
