@@ -80,6 +80,7 @@ export class TaskIndexComponent implements OnInit, OnDestroy {
       .getTaskIndexView()
       .subscribe(viewModel => {
         this.viewModel = viewModel;
+        this.setTaskUserName();
       });
   }
   
@@ -88,6 +89,17 @@ export class TaskIndexComponent implements OnInit, OnDestroy {
       .getTaskIndexViewPage(this.viewModel.predicate)
       .subscribe(pageModel => {
         this.viewModel.page = pageModel;
+        this.setTaskUserName();
       });
+  }
+
+  private setTaskUserName(): void {
+    this.viewModel.page.tasks.forEach(t => {
+      this.taskService
+        .getTaskUserName(t.id)
+        .subscribe(userName => {
+          t.userName = userName;
+        });
+    })
   }
 }

@@ -19,4 +19,5 @@ export class TaskIndexViewModel_PageModel_TaskModel {
     public name: string;
     public notes: string;
     public reminderDate: Date;
+    public userName: string;
 }

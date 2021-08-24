@@ -159,7 +159,15 @@ export class TaskService {
       }));
   }
 
-  public updateTask(id: number, updateModel: TaskUpdateModel) :Observable<number> {
+  public getTaskUserName(userId: number): Observable<string> {
+    return this.httpClient
+      .get<User>(`${environment.apiBaseUrl}/users/${userId}`, httpOptions)
+      .pipe(map(response => {
+        return response.name;
+      }));
+  }
+
+  public updateTask(id: number, updateModel: TaskUpdateModel): Observable<number> {
     var updateTask = {
       id: id,
       userId: updateModel.userId,
