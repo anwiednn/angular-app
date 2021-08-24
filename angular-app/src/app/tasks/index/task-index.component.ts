@@ -96,7 +96,7 @@ export class TaskIndexComponent implements OnInit, OnDestroy {
   private setTaskUserName(): void {
     this.viewModel.page.tasks.forEach(t => {
       this.taskService
-        .getTaskUserName(t.id)
+        .getTaskUserName(t.userId)
         .subscribe(userName => {
           t.userName = userName;
         });

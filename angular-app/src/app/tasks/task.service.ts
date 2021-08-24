@@ -111,9 +111,11 @@ export class TaskService {
             searchText: null
           } as TaskIndexViewModel_PredicateModel,
           page: {
+            total: response.length,
             tasks: response.map(t => {
               return {
                 id: t.id,
+                userId: t.userId,
                 name: t.name,
                 notes: t.notes,
                 reminderDate: t.reminderDate
@@ -130,6 +132,7 @@ export class TaskService {
 
     if (predicateModel.searchText) {
       queryOptions += `&name_like=${predicateModel.searchText}`;
+      queryOptions += `&notes_like=${predicateModel.searchText}`;
     }
 
     return forkJoin({
@@ -144,6 +147,7 @@ export class TaskService {
           return response.map(t => {
                 return {
                   id: t.id,
+                  userId: t.userId,
                   name: t.name,
                   notes: t.notes,
                   reminderDate: t.reminderDate
