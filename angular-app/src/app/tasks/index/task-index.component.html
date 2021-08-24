@@ -24,7 +24,17 @@
                     {{task.reminderDate | date}}
                 </mat-card-header>
                 <mat-card-content>
+                    <p>
+                        {{task.notes}}
+                    </p>
                 </mat-card-content>
+                <mat-card-actions>
+                    <button mat-mini-fab
+                            color="warn"
+                            (click)="deleteTaskClicked(task.id, $event)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </mat-card-actions>
             </mat-card>
         </mat-card-content>
         <mat-card-actions>

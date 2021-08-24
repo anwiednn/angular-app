@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TaskService } from '../task.service';
 import { TaskCreateModel } from './task-create-model';
 import { TaskCreateViewModel } from './task-create-view-model';
@@ -11,10 +13,19 @@ import { TaskCreateViewModel } from './task-create-view-model';
 export class TaskCreateComponent implements OnInit {
   public viewModel: TaskCreateViewModel;
 
-  constructor(private taskService: TaskService) { }
+  constructor(private taskService: TaskService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private snackBar: MatSnackBar) { }
 
   public ngOnInit(): void {
     this.setViewModel();
+  }
+
+  public cancelClicked(): void {
+    this.router.navigate(["../"], {
+      relativeTo: this.activatedRoute
+    });
   }
 
   public createTaskClicked(): void {
@@ -26,17 +37,22 @@ export class TaskCreateComponent implements OnInit {
     } as TaskCreateModel;
 
     this.taskService
-    .createTask(createModel)
-    .subscribe(taskId => {
-    });
+      .createTask(createModel)
+      .subscribe(taskId => {
+        this.router.navigate(["../"], {
+          relativeTo: this.activatedRoute
+        });
+        this.snackBar.open('Task Created', "", {
+          duration: 3000
+        });
+      });
   }
 
   private setViewModel(): void {
     this.taskService
-    .getTaskCreateView()
-    .subscribe(viewModel => {
-      this.viewModel = viewModel;
-    });
+      .getTaskCreateView()
+      .subscribe(viewModel => {
+        this.viewModel = viewModel;
+      });
   }
-
 }

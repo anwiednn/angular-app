@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { TaskService } from '../task.service';
 import { TaskIndexViewModel } from './task-index-view-model';
 
@@ -10,10 +11,25 @@ import { TaskIndexViewModel } from './task-index-view-model';
 })
 export class TaskIndexComponent implements OnInit {
   public viewModel: TaskIndexViewModel;
-  public showCreateTask: boolean;
-  public showEditTask: boolean;
 
-  constructor(private taskService: TaskService) {
+  constructor(private taskService: TaskService,
+    private snackBar: MatSnackBar) {
+  }
+
+  public ngOnInit(): void {
+    this.setViewModel();
+  }
+
+  public deleteTaskClicked(taskId: number, event: Event): void {
+    event.preventDefault();
+    this.taskService
+      .deleteTask(taskId)
+      .subscribe(() => {
+        this.setViewModel();
+        this.snackBar.open('Task Deleted', "", {
+          duration: 3000
+        });
+      });
   }
   
   public pageChanged(event : PageEvent) : void {
@@ -32,7 +48,6 @@ export class TaskIndexComponent implements OnInit {
       .getTaskIndexView()
       .subscribe(viewModel => {
         this.viewModel = viewModel;
-        console.log(viewModel);
       });
   }
   
@@ -43,9 +58,4 @@ export class TaskIndexComponent implements OnInit {
         this.viewModel.page = pageModel;
       });
   }
-
-  public ngOnInit(): void {
-    this.setViewModel();
-  }
-
 }

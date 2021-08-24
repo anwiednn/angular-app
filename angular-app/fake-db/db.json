@@ -1,13 +1,6 @@
 {
   "tasks": [
     {
-      "id": 1,
-      "userId": 1,
-      "name": "Complete Groceries Shopping",
-      "notes": "",
-      "reminderDate": "2021-08-15 08:00:00.000"
-    },
-    {
       "id": 2,
       "userId": 2,
       "name": "Car WOF",
