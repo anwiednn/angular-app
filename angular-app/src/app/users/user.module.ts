@@ -19,6 +19,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
+import { AppEventService } from '../shared/app-event.service';
 
 @NgModule({
   declarations: [
@@ -48,17 +49,11 @@ import { MatSelectModule } from '@angular/material/select';
     MatSelectModule,
     RouterModule.forChild([{
         path: "",
-        component: UserIndexComponent,
-        // children: [{
-        //   path: "create",
-        //   component: UserCreateComponent
-        // }, {
-        //   path: "detail/:id",
-        //   component: UserDetailComponent
-        // }]
+        component: UserIndexComponent
     }])
   ],
   providers: [
+    AppEventService,
     UserService
   ]
 })

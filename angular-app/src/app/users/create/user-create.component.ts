@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { AppEventChangeType } from 'src/app/appEvents/app-event-changed-model';
-import { AppEventService } from 'src/app/appEvents/app-event.service';
+import { AppEventChangeType } from '../../shared/app-event-changed-model';
+import { AppEventService } from '../../shared/app-event.service';
 import { UserService } from '../user.service';
 import { UserCreateModel } from './user-create-model';
 import { UserCreateViewModel, UserCreateViewModel_DetailModel } from './user-create-view-model';

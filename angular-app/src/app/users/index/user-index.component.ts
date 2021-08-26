@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
-import { AppEventService } from 'src/app/appEvents/app-event.service';
+import { AppEventService } from '../../shared/app-event.service';
 import { UserCreateComponent } from '../create/user-create.component';
 import { UserDetailComponent } from '../detail/user-detail.component';
 import { UserService } from '../user.service';

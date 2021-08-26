@@ -1,8 +1,8 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
-import { AppEventChangeType } from 'src/app/appEvents/app-event-changed-model';
-import { AppEventService } from 'src/app/appEvents/app-event.service';
+import { AppEventChangeType } from '../../shared/app-event-changed-model';
+import { AppEventService } from '../../shared/app-event.service';
 import { UserService } from '../user.service';
 import { UserDetailViewModel } from './user-detail-view-model';
 import { UserUpdateModel } from './user-update-model';

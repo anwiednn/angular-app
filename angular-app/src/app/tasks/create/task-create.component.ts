@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AppEventChangeType } from 'src/app/appEvents/app-event-changed-model';
-import { AppEventService } from 'src/app/appEvents/app-event.service';
+import { AppEventChangeType } from '../../shared/app-event-changed-model';
+import { AppEventService } from '../../shared/app-event.service';
 import { TaskService } from '../task.service';
 import { TaskCreateModel } from './task-create-model';
 import { TaskCreateViewModel } from './task-create-view-model';
