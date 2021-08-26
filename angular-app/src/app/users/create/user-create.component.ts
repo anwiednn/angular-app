@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { AppEventChangeType } from 'src/app/appEvents/app-event-changed-model';
+import { AppEventService } from 'src/app/appEvents/app-event.service';
 import { UserService } from '../user.service';
 import { UserCreateModel } from './user-create-model';
 import { UserCreateViewModel, UserCreateViewModel_DetailModel } from './user-create-view-model';
@@ -13,6 +15,7 @@ export class UserCreateComponent implements OnInit {
   public viewModel: UserCreateViewModel;
 
   constructor(
+    private appEventService: AppEventService,
     private dialogRef: MatDialogRef<UserCreateComponent>,
     private userService: UserService) { }
 
@@ -35,7 +38,12 @@ export class UserCreateComponent implements OnInit {
 
     this.userService
       .createUser(createModel)
-      .subscribe(() => {
+      .subscribe(userId => {
+        this.appEventService.userChanged
+          .next({
+            id: userId,
+            type: AppEventChangeType.Create
+          });
         this.dialogRef.close(true);    
       });
   }

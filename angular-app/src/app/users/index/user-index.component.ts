@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subscription } from 'rxjs';
+import { AppEventService } from 'src/app/appEvents/app-event.service';
 import { UserCreateComponent } from '../create/user-create.component';
 import { UserDetailComponent } from '../detail/user-detail.component';
 import { UserService } from '../user.service';
@@ -12,7 +14,7 @@ import { UserIndexViewModel } from './user-index-view-model';
   templateUrl: './user-index.component.html',
   styleUrls: ['./user-index.component.scss']
 })
-export class UserIndexComponent implements OnInit {
+export class UserIndexComponent implements OnInit, OnDestroy {
   public displayedColumns: string[] = [
     'name', 
     'email', 
@@ -21,12 +23,25 @@ export class UserIndexComponent implements OnInit {
   ];
   public viewModel: UserIndexViewModel;
 
-  constructor(private dialog: MatDialog,
+  private userChangedSubscription: Subscription;
+
+  constructor(
+    private dialog: MatDialog,
     private snackBar: MatSnackBar, 
+    private appEventService: AppEventService,
     private userService: UserService) { }
 
   public ngOnInit(): void {
     this.setViewModel();
+
+    this.userChangedSubscription = this.appEventService.userChanged
+      .subscribe(() => {
+        this.setViewModel();
+      });
+  }
+
+  public ngOnDestroy(): void {
+    this.userChangedSubscription.unsubscribe();
   }
 
   public createUserClicked(): void {    
@@ -41,7 +56,6 @@ export class UserIndexComponent implements OnInit {
         this.snackBar.open('User Created', "", {
           duration: 3000
         });
-        this.setViewModelPage();
       }
     });
   }
@@ -61,7 +75,6 @@ export class UserIndexComponent implements OnInit {
         this.snackBar.open('User Updated', "", {
           duration: 3000
         });
-        this.setViewModelPage();
       }
     });
   }
