@@ -1,29 +1,29 @@
-<mat-toolbar fxFlex="0 0 auto">
-  <button mat-icon-button>
-    <mat-icon>menu</mat-icon>
-  </button>
-  <span>Task Reminder</span>
+<mat-toolbar >
+	<button mat-icon-button>
+		<mat-icon>menu</mat-icon>
+	</button>
+	<span>Task Reminder</span>
 </mat-toolbar>
-<mat-sidenav-container fxFlex="1 1 auto" fxLayout="row">
-  <mat-sidenav mode="side" opened>
+<mat-sidenav-container>
+	<mat-sidenav mode="side" opened>
 		<mat-nav-list>
 			<mat-list-item routerLink="tasks"
-               routerLinkActive="active">
+				routerLinkActive="active">
 				<mat-icon matListIcon>apps</mat-icon>
 				<h2 matLine>
 					Tasks
 				</h2>
 			</mat-list-item>
 			<mat-list-item routerLink="users" 
-               routerLinkActive="active">
+				routerLinkActive="active">
 				<mat-icon matListIcon>groups</mat-icon>
 				<h2 matLine>
 					Users
 				</h2>
 			</mat-list-item>
 		</mat-nav-list>
-  </mat-sidenav>
-	<mat-sidenav-content fxFlex="1 1 auto" fxLayout="column">
-    <router-outlet></router-outlet>
-  </mat-sidenav-content>
+	</mat-sidenav>
+	<mat-sidenav-content >
+		<router-outlet></router-outlet>
+	</mat-sidenav-content>
 </mat-sidenav-container>
