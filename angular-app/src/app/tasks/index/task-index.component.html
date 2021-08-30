@@ -5,6 +5,11 @@
                 [(ngModel)]="viewModel.predicate.searchText"
                 (keydown.enter)="searchChanged()"
                 name="searchText">
+            <button *ngIf="viewModel.predicate.searchText" 
+                    matSuffix mat-icon-button 
+                    (click)="viewModel.predicate.searchText='';searchChanged()">
+                <mat-icon>close</mat-icon>
+            </button>
         </mat-form-field>
         <mat-form-field fxFlex>
             <mat-select placeholder="Choose a status"
@@ -26,6 +31,9 @@
         </button>
     </mat-card>
     <router-outlet></router-outlet>
+    <mat-card *ngIf="viewModel.page.tasks.length == 0">
+        No results found
+    </mat-card>
     <div class="mb-2"
         fxLayout="row"
         fxLayoutGap="10px"
