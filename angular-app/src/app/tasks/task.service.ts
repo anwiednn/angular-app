@@ -28,7 +28,8 @@ export class TaskService {
       userId: createModel.userId,
       name: createModel.name,
       notes: createModel.notes,
-      reminderDate: createModel.reminderDate      
+      reminderDate: createModel.reminderDate,
+      completed: false     
     } as Task;
 
     return this.httpClient
