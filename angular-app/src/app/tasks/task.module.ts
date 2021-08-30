@@ -18,6 +18,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SharedModule } from '../shared/shared.module';
 import { AppEventService } from '../shared/app-event.service';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import { AppEventService } from '../shared/app-event.service';
   imports: [
     CommonModule,
     FormsModule,
+    FlexLayoutModule,
     HttpClientModule,
     MatDatepickerModule,
     MatButtonModule,
@@ -38,6 +41,7 @@ import { AppEventService } from '../shared/app-event.service';
     MatSelectModule,
     MatPaginatorModule,
     MatSnackBarModule,
+    MatGridListModule,
     SharedModule,
     RouterModule.forChild([{
         path: "",

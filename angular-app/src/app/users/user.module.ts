@@ -20,6 +20,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { AppEventService } from '../shared/app-event.service';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { AppEventService } from '../shared/app-event.service';
   imports: [
     CommonModule,
     FormsModule,
+    FlexLayoutModule,
     HttpClientModule,
     MatButtonModule,
     MatCardModule,

@@ -1,47 +1,60 @@
-<form #formTask="ngForm"
-    *ngIf="viewModel">
-    <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input matInput placeholder="Enter the task name..." #name="ngModel"
-            [(ngModel)]="viewModel.detail.name"
-            name="name"
-            required maxlength="50">
-        <mat-error *ngIf="name?.errors?.required">Required</mat-error>
-        <mat-error *ngIf="name?.errors?.maxlength">Max lenght 50</mat-error>
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>Notes</mat-label>
-        <textarea matInput #notes="ngModel"
-            name="notes"
-            [(ngModel)]="viewModel.detail.notes"></textarea>           
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>Reminder Date</mat-label>
-        <input matInput 
-            [(ngModel)]="viewModel.detail.reminderDate" #reminderDate="ngModel"
-            name="reminderDate"
-            [matDatepicker]="picker"
-            required>
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-        <mat-error *ngIf="reminderDate?.errors?.required">Required</mat-error>
-    </mat-form-field>      
-    <mat-form-field>
-        <mat-label>Choose users</mat-label>
-        <mat-select 
-            [(ngModel)]="viewModel.detail.userId" #userId="ngModel"
-            name="userId"
-            required>
-            <mat-option *ngFor="let userOption of viewModel.userOptions" 
-                [value]="userOption.id">
-                {{userOption.name}}
-            </mat-option>
-        </mat-select>
-        <mat-error *ngIf="userId?.errors?.required">Required</mat-error>
-    </mat-form-field>
-    <button mat-button
-          (click)="cancelClicked()">Cancel</button>
-    <button mat-button
-          [disabled]="formTask.invalid"
-          (click)="createTaskClicked()">Create</button>
-</form>
+<mat-card class="mb-2"
+          *ngIf="viewModel">
+    <mat-card-subtitle>
+        Create Task
+    </mat-card-subtitle>
+    <mat-card-content>
+        <form #formTask="ngForm" 
+              fxLayout
+              fxLayoutGap="10px"
+              fxLayout.xs="column">
+            <mat-form-field fxFlex>
+                <mat-label>Name</mat-label>
+                <input matInput placeholder="Enter the task name..." #name="ngModel"
+                    [(ngModel)]="viewModel.detail.name"
+                    name="name"
+                    required maxlength="50">
+                <mat-error *ngIf="name?.errors?.required">Required</mat-error>
+                <mat-error *ngIf="name?.errors?.maxlength">Max lenght 50</mat-error>
+            </mat-form-field>
+            <mat-form-field fxFlex>
+                <mat-label>Reminder Date</mat-label>
+                <input matInput 
+                    [(ngModel)]="viewModel.detail.reminderDate" #reminderDate="ngModel"
+                    name="reminderDate"
+                    [matDatepicker]="picker"
+                    required>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="reminderDate?.errors?.required">Required</mat-error>
+            </mat-form-field>  
+            <mat-form-field fxFlex>
+                <mat-label>Choose users</mat-label>
+                <mat-select 
+                    [(ngModel)]="viewModel.detail.userId" #userId="ngModel"
+                    name="userId"
+                    required>
+                    <mat-option *ngFor="let userOption of viewModel.userOptions" 
+                        [value]="userOption.id">
+                        {{userOption.name}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="userId?.errors?.required">Required</mat-error>
+            </mat-form-field>
+            <mat-form-field fxFlex>
+                <mat-label>Notes</mat-label>
+                <textarea matInput #notes="ngModel"
+                    name="notes"
+                    [(ngModel)]="viewModel.detail.notes"></textarea>           
+            </mat-form-field>
+        </form>
+    </mat-card-content>
+    <mat-card-actions class="text-right">
+        <button mat-button
+              (click)="cancelClicked()">Cancel</button>
+        <button mat-raised-button
+                color="primary"
+                [disabled]="formTask.invalid"
+                (click)="createTaskClicked()">Create</button>
+    </mat-card-actions>
+</mat-card>

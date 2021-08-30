@@ -1,31 +1,26 @@
 <ng-container *ngIf="viewModel">
-    <mat-card>
-        <mat-card-content>
-            Search
-        </mat-card-content>
+    <mat-card class="mb-2 pb-0" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+        <mat-form-field fxFlex>
+            <input matInput placeholder="Search..."
+                [(ngModel)]="viewModel.predicate.searchText"
+                (keydown.enter)="searchChanged()"
+                name="searchText">
+        </mat-form-field>
+        <button mat-icon-button
+                routerLink="create">
+            <mat-icon>add</mat-icon>
+        </button>
     </mat-card>
-    <mat-card>
-        <mat-card-content>
-            <mat-form-field>
-                <input matInput placeholder="Search..."
-                    [(ngModel)]="viewModel.predicate.searchText"
-                    (keydown.enter)="searchChanged()"
-                    name="searchText">
-            </mat-form-field>
-            <button mat-mini-fab
-                    routerLink="create">
-                <mat-icon>add</mat-icon>
-            </button>
-            <router-outlet></router-outlet>
-            <mat-card *ngFor="let task of viewModel.page.tasks"
-                    [routerLink]="['detail', task.id]">
-                <mat-card-header>
+    <router-outlet></router-outlet>
+    <mat-grid-list class="mb-2" cols="4" rowHeight="125px">
+        <mat-grid-tile *ngFor="let task of viewModel.page.tasks">            
+            <mat-card fxFlexFill
+                [routerLink]="['detail', task.id]">
+                <mat-card-content>
                     {{task.name}}
                     {{task.reminderDate | date}}
                     {{task.userName}}
-                </mat-card-header>
-                <mat-card-content>
-                    <p>
+                    <p *ngIf="task.notes">
                         {{task.notes}}
                     </p>
                 </mat-card-content>
@@ -36,16 +31,16 @@
                         <mat-icon>delete</mat-icon>
                     </button>
                 </mat-card-actions>
-            </mat-card>
-        </mat-card-content>
-        <mat-card-actions>
-            <mat-paginator 
-                [length]="viewModel.page.total"
-                [pageIndex]="viewModel.predicate.pageNumber"
-                [pageSize]="viewModel.predicate.pageSize"
-                [pageSizeOptions]="[1, 5, 10, 25, 100]"
-                (page)="pageChanged($event)">
-            </mat-paginator>
-        </mat-card-actions>
+                </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+    <mat-card class="p-0">
+        <mat-paginator 
+            [length]="viewModel.page.total"
+            [pageIndex]="viewModel.predicate.pageNumber"
+            [pageSize]="viewModel.predicate.pageSize"
+            [pageSizeOptions]="[1, 5, 10, 25, 100]"
+            (page)="pageChanged($event)">
+        </mat-paginator>
     </mat-card>
 </ng-container>
