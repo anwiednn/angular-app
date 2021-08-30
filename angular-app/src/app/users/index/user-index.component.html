@@ -39,24 +39,21 @@
               *ngIf="viewModel.page.users.length > 0">    
         <mat-table mat-table [dataSource]="viewModel.page.users" fxFlexFill>
             <ng-container matColumnDef="name">
-                <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
-                <mat-cell *matCellDef="let user">{{user.name}}</mat-cell>
+                <mat-header-cell *matHeaderCellDef fxFlex>Name</mat-header-cell>
+                <mat-cell *matCellDef="let user" fxFlex>{{user.name}}</mat-cell>
             </ng-container>
             <ng-container matColumnDef="email">
-                <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
-                <mat-cell *matCellDef="let user"> {{user.email}}</mat-cell>
+                <mat-header-cell *matHeaderCellDef fxFlex="60%">Email</mat-header-cell>
+                <mat-cell *matCellDef="let user" fxFlex="60%">{{user.email}}</mat-cell>
             </ng-container>
             <ng-container matColumnDef="active">
-                <mat-header-cell *matHeaderCellDef>Active</mat-header-cell>
-                <mat-cell *matCellDef="let user">{{(user.active ? "Yes" : "No")}}</mat-cell>
+                <mat-header-cell *matHeaderCellDef fxFlex="65px">Active</mat-header-cell>
+                <mat-cell *matCellDef="let user" fxFlex="65px">{{(user.active ? "Yes" : "No")}}</mat-cell>
             </ng-container>
-            <ng-container matColumnDef="actions">
-                <mat-header-cell *matHeaderCellDef></mat-header-cell>
-                <mat-cell *matCellDef="let user"></mat-cell>
-            </ng-container>  
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: displayedColumns;" 
-                        (click)="detailUserClicked(row.id)"></mat-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"
+                     style="cursor: pointer;"
+                     (click)="detailUserClicked(row.id)"></mat-row>
         </mat-table>
     </mat-card>
     <mat-card class="p-0">

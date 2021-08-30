@@ -19,8 +19,7 @@ export class UserIndexComponent implements OnInit, OnDestroy {
   public displayedColumns: string[] = [
     'name', 
     'email', 
-    'active', 
-    'actions'
+    'active'
   ];
   public viewModel: UserIndexViewModel;
   public isXsDisplay: boolean;
