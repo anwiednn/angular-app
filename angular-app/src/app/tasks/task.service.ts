@@ -101,16 +101,18 @@ export class TaskService {
   }
 
   public getTaskIndexView() : Observable<TaskIndexViewModel> {
-    var queryOptions: string = `_page=1&_limit=9999`;
+    var pagingOptions: string = `_page=1&_limit=9999`;
+    var queryOptions: string = `&completed=false`;
 
     return this.httpClient
-      .get<Task[]>(`${environment.apiBaseUrl}/tasks?${queryOptions}`, httpOptions)
+      .get<Task[]>(`${environment.apiBaseUrl}/tasks?${pagingOptions}${queryOptions}`, httpOptions)
       .pipe(map(response => {
         return {
           predicate: {
             pageNumber: 0,
             pageSize: 25,
-            searchText: null
+            searchText: null,
+            completed: false
           } as TaskIndexViewModel_PredicateModel,
           page: {
             total: response.length,

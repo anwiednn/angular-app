@@ -16,8 +16,8 @@
                         [(ngModel)]="viewModel.predicate.completed"
                         (selectionChange)="searchChanged()">
                 <mat-option>Any</mat-option>
-                <mat-option value="false">Uncompleted</mat-option>
-                <mat-option value="true">Completed</mat-option>
+                <mat-option [value]="false">Uncompleted</mat-option>
+                <mat-option [value]="true">Completed</mat-option>
             </mat-select>
         </mat-form-field>
         <button *ngIf="!isXsDisplay" mat-icon-button
@@ -53,18 +53,19 @@
                 <p *ngIf="task.notes">
                     {{task.notes}}
                 </p>
-                <p class="text-right" *ngIf="task.completed">
+            </mat-card-content>
+            <mat-card-actions>
+                <span fxFlex></span>
+                <p fxFlexAlign="center" *ngIf="task.completed">
                     <strong>TASK COMPLETED</strong>
                 </p>
-            </mat-card-content>
-            <mat-card-actions *ngIf="!task.completed">
-                <button mat-icon-button
+                <button *ngIf="!task.completed"
+                        mat-icon-button
                         [routerLink]="['detail', task.id]">
                     <mat-icon>edit</mat-icon>
                 </button>
-                <span fxFlex></span>
-                <button mat-icon-button
-                        color="warn"
+                <button *ngIf="!task.completed"
+                        mat-icon-button
                         (click)="deleteTaskClicked(task.id)">
                     <mat-icon>delete</mat-icon>
                 </button>
