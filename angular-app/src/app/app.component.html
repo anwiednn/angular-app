@@ -1,15 +1,18 @@
-<mat-toolbar fxFlex="0 0 auto" color="accent">
-	<button mat-icon-button>
+<mat-toolbar fxFlex="0 0 auto" color="primary">
+	<button mat-icon-button class="mr-3"
+		(click)="toggleSidenavClicked()">
 		<mat-icon>menu</mat-icon>
 	</button>
 	<span>Task Reminder</span>
 </mat-toolbar>
 <mat-sidenav-container fxFlex="1 1 auto" fxLayout="row" style="height:100%">
-	<mat-sidenav mode="side" opened>
+	<mat-sidenav #sidenav
+		[mode]="sidenavMode"
+		[opened]="sidenavOpened">
 		<mat-nav-list>
 			<mat-list-item routerLink="tasks"
 				routerLinkActive="active">
-				<mat-icon matListIcon>apps</mat-icon>
+				<mat-icon matListIcon>task</mat-icon>
 				<h2 matLine>
 					Tasks
 				</h2>

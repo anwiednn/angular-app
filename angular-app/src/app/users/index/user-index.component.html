@@ -15,6 +15,10 @@
                 <mat-option value="false">Inactive</mat-option>
             </mat-select>
         </mat-form-field>
+        <button mat-icon-button 
+                (click)="createUserClicked()">
+            <mat-icon>person_add</mat-icon>
+        </button>
     </mat-card>
     <mat-card class="mb-2 p-0">    
         <mat-table mat-table [dataSource]="viewModel.page.users" fxFlexFill>
@@ -31,12 +35,7 @@
                 <mat-cell *matCellDef="let user">{{(user.active ? "Yes" : "No")}}</mat-cell>
             </ng-container>
             <ng-container matColumnDef="actions">
-                <mat-header-cell *matHeaderCellDef>
-                    <button mat-icon-button 
-                            (click)="createUserClicked()">
-                        <mat-icon>add</mat-icon>
-                    </button>
-                </mat-header-cell>
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
                 <mat-cell *matCellDef="let user"></mat-cell>
             </ng-container>  
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

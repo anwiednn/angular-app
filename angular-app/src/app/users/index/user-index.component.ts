@@ -48,7 +48,7 @@ export class UserIndexComponent implements OnInit, OnDestroy {
     this.dialog
     .open(UserCreateComponent, {
       disableClose: true,
-      width: '250px'
+      width: '350px'
     })
     .afterClosed()
     .subscribe(result => {
@@ -67,7 +67,7 @@ export class UserIndexComponent implements OnInit, OnDestroy {
         userId: id 
       },
       disableClose: true,
-      width: '250px'
+      width: "350px"
     })
     .afterClosed()
     .subscribe(result => {
