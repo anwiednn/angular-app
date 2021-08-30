@@ -53,6 +53,9 @@
                 <p *ngIf="task.notes">
                     {{task.notes}}
                 </p>
+                <p class="text-right" *ngIf="task.completed">
+                    <strong>TASK COMPLETED</strong>
+                </p>
             </mat-card-content>
             <mat-card-actions *ngIf="!task.completed">
                 <button mat-icon-button
