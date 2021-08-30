@@ -3,4 +3,5 @@ export class TaskUpdateModel {
     public name: string;
     public notes: string;
     public reminderDate: Date;
+    public completed: boolean;
 }

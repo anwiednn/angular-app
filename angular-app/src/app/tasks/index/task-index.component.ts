@@ -40,11 +40,39 @@ export class TaskIndexComponent implements OnInit, OnDestroy {
     this.taskChangedSubscription.unsubscribe();
   }
 
-  public deleteTaskClicked(taskId: number, event: Event): void {
-    event.preventDefault();
-
+  public completeTaskClicked(taskId: number): void {
     this.dialog
-      .open(DialogConfirmComponent)
+      .open(DialogConfirmComponent, {
+        data: { 
+          message: "Are you sure you want to complete this task?"
+        }
+      })
+      .afterClosed()
+      .subscribe((result: Boolean) => {
+        if (result) {
+          this.taskService
+            .completeTask(taskId)
+            .subscribe(() => {
+              this.appEventService.taskChanged.next({
+                id: taskId,
+                type: AppEventChangeType.Delete
+              });
+              this.snackBar.open('Task Completed', "", {
+                duration: 3000
+              });
+              this.setViewModel();
+            });
+        }
+      });
+  }
+
+  public deleteTaskClicked(taskId: number): void {
+    this.dialog
+      .open(DialogConfirmComponent, {
+        data: { 
+          message: "Are you sure you want to delete this task?"
+        }
+      })
       .afterClosed()
       .subscribe((result: Boolean) => {
         if (result) {

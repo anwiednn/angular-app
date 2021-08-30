@@ -19,7 +19,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SharedModule } from '../shared/shared.module';
 import { AppEventService } from '../shared/app-event.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatGridListModule } from '@angular/material/grid-list';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -41,7 +41,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
     MatSelectModule,
     MatPaginatorModule,
     MatSnackBarModule,
-    MatGridListModule,
+    MatSlideToggleModule,
     SharedModule,
     RouterModule.forChild([{
         path: "",

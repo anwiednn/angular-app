@@ -36,6 +36,17 @@ export class TaskService {
       .pipe(map(response => response.id));
   }
 
+  public completeTask(id: number) : Observable<void> {
+     return this.httpClient
+    .get<Task>(`${environment.apiBaseUrl}/tasks/${id}`, httpOptions)
+    .pipe(map(task => {      
+      task.completed = true;
+
+      this.httpClient
+        .put<Task>(`${environment.apiBaseUrl}/tasks/${id}`, task, httpOptions);
+    }));
+  }
+
   public deleteTask(id: number) : Observable<void> {
     return this.httpClient
       .delete<Task>(`${environment.apiBaseUrl}/tasks/${id}`, httpOptions)
@@ -75,7 +86,8 @@ export class TaskService {
                 userId: task.userId,
                 name: task.name,
                 notes: task.notes,
-                reminderDate: task.reminderDate
+                reminderDate: task.reminderDate,
+                completed: task.completed
               } as TaskDetailViewModel_DetailModel;
           })),
         userOptions: this.httpClient
@@ -118,7 +130,8 @@ export class TaskService {
                 userId: t.userId,
                 name: t.name,
                 notes: t.notes,
-                reminderDate: t.reminderDate
+                reminderDate: t.reminderDate,
+                completed: t.completed
               } as TaskIndexViewModel_PageModel_TaskModel
             })
           } as TaskIndexViewModel_PageModel
@@ -129,10 +142,13 @@ export class TaskService {
   public getTaskIndexViewPage(predicateModel: TaskIndexViewModel_PredicateModel) : Observable<TaskIndexViewModel_PageModel> {
     var pagingOptions: string = `_page=${predicateModel.pageNumber+1}&_limit=${predicateModel.pageSize}`;
     var queryOptions: string = ``;
+    
+    if (predicateModel.completed != null) {
+      queryOptions += `&completed=${predicateModel.completed}`;
+    }
 
     if (predicateModel.searchText) {
-      queryOptions += `&name_like=${predicateModel.searchText}`;
-      queryOptions += `&notes_like=${predicateModel.searchText}`;
+      queryOptions += `&q=${predicateModel.searchText}`;
     }
 
     return forkJoin({
@@ -150,7 +166,8 @@ export class TaskService {
                   userId: t.userId,
                   name: t.name,
                   notes: t.notes,
-                  reminderDate: t.reminderDate
+                  reminderDate: t.reminderDate,
+                  completed: t.completed
                 } as TaskIndexViewModel_PageModel_TaskModel
               });
         }))
@@ -177,7 +194,8 @@ export class TaskService {
       userId: updateModel.userId,
       name: updateModel.name,
       notes: updateModel.notes,
-      reminderDate: updateModel.reminderDate      
+      reminderDate: updateModel.reminderDate  ,
+      completed: updateModel.completed  
     } as Task;
 
     return this.httpClient

@@ -9,6 +9,7 @@ export class TaskDetailViewModel_DetailModel {
     public name: string;
     public notes: string;
     public reminderDate: Date;
+    public completed: boolean;
 }
 
 export class TaskDetailViewModel_UserOptionModel {

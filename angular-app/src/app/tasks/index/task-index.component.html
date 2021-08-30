@@ -6,6 +6,15 @@
                 (keydown.enter)="searchChanged()"
                 name="searchText">
         </mat-form-field>
+        <mat-form-field fxFlex>
+            <mat-select placeholder="Choose a status"
+                        [(ngModel)]="viewModel.predicate.completed"
+                        (selectionChange)="searchChanged()">
+                <mat-option>Any</mat-option>
+                <mat-option value="false">Uncompleted</mat-option>
+                <mat-option value="true">Completed</mat-option>
+            </mat-select>
+        </mat-form-field>
         <button mat-icon-button
                 routerLink="create">
             <mat-icon>add</mat-icon>
@@ -32,9 +41,10 @@
                     {{task.notes}}
                 </p>
             </mat-card-content>
-            <mat-card-actions>
-                <button mat-icon-button>
-                    <mat-icon>done</mat-icon>
+            <mat-card-actions *ngIf="!task.completed">
+                <button mat-icon-button
+                        (click)="completeTaskClicked(task.id)">
+                    <mat-icon>check_circle</mat-icon>
                 </button>
                 <span fxFlex></span>
                 <button mat-icon-button
@@ -43,7 +53,7 @@
                 </button>
                 <button mat-icon-button
                         color="warn"
-                        (click)="deleteTaskClicked(task.id, $event)">
+                        (click)="deleteTaskClicked(task.id)">
                     <mat-icon>delete</mat-icon>
                 </button>
             </mat-card-actions>

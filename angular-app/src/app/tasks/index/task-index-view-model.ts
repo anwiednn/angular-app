@@ -7,6 +7,7 @@ export class TaskIndexViewModel_PredicateModel {
     public pageNumber: number;
     public pageSize: number;
     public searchText: string | null;
+    public completed: boolean | null;
 }
 
 export class TaskIndexViewModel_PageModel {
@@ -20,5 +21,6 @@ export class TaskIndexViewModel_PageModel_TaskModel {
     public name: string;
     public notes: string;
     public reminderDate: Date;
+    public completed: boolean;
     public userName: string;
 }

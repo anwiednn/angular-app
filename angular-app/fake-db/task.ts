@@ -5,4 +5,5 @@ export interface Task
     name: string;
     notes: string;
     reminderDate: Date;
+    completed: boolean;
 }

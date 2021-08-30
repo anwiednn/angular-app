@@ -41,7 +41,10 @@
                         </mat-option>
                     </mat-select>
                     <mat-error *ngIf="userId?.errors?.required">Required</mat-error>
-                </mat-form-field>                
+                </mat-form-field>      
+                <mat-slide-toggle class="mt-3"
+                    [(ngModel)]="viewModel.detail.completed" 
+                    name="completed">Completed</mat-slide-toggle>          
             </div>
             <mat-form-field fxFlex>
                 <mat-label>Notes</mat-label>

@@ -63,7 +63,8 @@ export class TaskDetailComponent implements OnInit {
       userId: this.viewModel.detail.userId,
       name: this.viewModel.detail.name,
       notes: this.viewModel.detail.notes,
-      reminderDate: this.viewModel.detail.reminderDate
+      reminderDate: this.viewModel.detail.reminderDate,
+      completed: this.viewModel.detail.completed
     } as TaskUpdateModel;
 
     this.taskService
