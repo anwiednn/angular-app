@@ -8,7 +8,7 @@
               fxLayout="column">
             <div fxLayout
                 fxLayoutGap="10px"
-                fxLayout.xs="column">
+                fxLayout.lt-md="column">
                 <mat-form-field fxFlex>
                     <mat-label>Name</mat-label>
                     <input matInput placeholder="Enter the task name..." #name="ngModel"
@@ -41,8 +41,9 @@
                         </mat-option>
                     </mat-select>
                     <mat-error *ngIf="userId?.errors?.required">Required</mat-error>
-                </mat-form-field>      
-                <mat-slide-toggle class="mt-3"
+                </mat-form-field>
+                <mat-slide-toggle fxFlexAlign="start"
+                    fxFlexAlign.gt-sm="center"
                     [(ngModel)]="viewModel.detail.completed" 
                     name="completed">Completed</mat-slide-toggle>          
             </div>
@@ -54,12 +55,13 @@
             </mat-form-field>
         </form>
     </mat-card-content>
-    <mat-card-actions class="text-right">
-    <button mat-button
-        (click)="cancelClicked()">Cancel</button>
-    <button mat-raised-button
-        color="primary"
-        [disabled]="formTask.invalid"
-        (click)="updateTaskClicked()">Update</button>
+    <mat-card-actions>
+        <button mat-button
+            (click)="cancelClicked()">Cancel</button>
+        <span fxFlex></span>
+        <button mat-raised-button
+            color="primary"
+            [disabled]="formTask.invalid"
+            (click)="updateTaskClicked()">Update</button>
     </mat-card-actions>
 </mat-card>
