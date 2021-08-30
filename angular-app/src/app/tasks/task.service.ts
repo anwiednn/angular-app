@@ -36,17 +36,6 @@ export class TaskService {
       .pipe(map(response => response.id));
   }
 
-  public completeTask(id: number) : Observable<void> {
-     return this.httpClient
-    .get<Task>(`${environment.apiBaseUrl}/tasks/${id}`, httpOptions)
-    .pipe(map(task => {      
-      task.completed = true;
-
-      this.httpClient
-        .put<Task>(`${environment.apiBaseUrl}/tasks/${id}`, task, httpOptions);
-    }));
-  }
-
   public deleteTask(id: number) : Observable<void> {
     return this.httpClient
       .delete<Task>(`${environment.apiBaseUrl}/tasks/${id}`, httpOptions)

@@ -15,9 +15,15 @@
                 <mat-option value="false">Inactive</mat-option>
             </mat-select>
         </mat-form-field>
-        <button mat-icon-button 
+        <button *ngIf="!isXsDisplay"
+                mat-icon-button 
                 (click)="createUserClicked()">
             <mat-icon>add</mat-icon>
+        </button>
+        <button class="mb-2" *ngIf="isXsDisplay"
+                mat-raised-button 
+                (click)="createUserClicked()">
+            Add User
         </button>
     </mat-card>
     <mat-card class="mb-2 p-0">    

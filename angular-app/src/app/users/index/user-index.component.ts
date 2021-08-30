@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MediaObserver } from '@angular/flex-layout';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -22,17 +23,25 @@ export class UserIndexComponent implements OnInit, OnDestroy {
     'actions'
   ];
   public viewModel: UserIndexViewModel;
+  public isXsDisplay: boolean;
 
+  private mediaSubscription: Subscription;
   private userChangedSubscription: Subscription;
 
   constructor(
     private dialog: MatDialog,
+		private media: MediaObserver,
     private snackBar: MatSnackBar, 
     private appEventService: AppEventService,
     private userService: UserService) { }
-
+  
   public ngOnInit(): void {
     this.setViewModel();
+
+    this.mediaSubscription = this.media.media$
+      .subscribe(mediaChange => {
+        this.isXsDisplay = mediaChange.mqAlias == "xs";
+      });
 
     this.userChangedSubscription = this.appEventService.userChanged
       .subscribe(() => {
@@ -41,6 +50,7 @@ export class UserIndexComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
+    this.mediaSubscription.unsubscribe();
     this.userChangedSubscription.unsubscribe();
   }
 

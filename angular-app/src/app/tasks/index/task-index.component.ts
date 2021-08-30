@@ -8,6 +8,7 @@ import { AppEventService } from '../../shared/app-event.service';
 import { DialogConfirmComponent } from 'src/app/shared/dialog/dialog-confirm.component';
 import { TaskService } from '../task.service';
 import { TaskIndexViewModel } from './task-index-view-model';
+import { MediaObserver } from '@angular/flex-layout';
 
 @Component({
   selector: 'app-task-index',
@@ -16,11 +17,14 @@ import { TaskIndexViewModel } from './task-index-view-model';
 })
 export class TaskIndexComponent implements OnInit, OnDestroy {
   public viewModel: TaskIndexViewModel;
+  public isXsDisplay: boolean;
 
+  private mediaSubscription: Subscription;
   private taskChangedSubscription: Subscription;
 
   constructor(
     private appEventService: AppEventService,
+		private media: MediaObserver,
     private taskService: TaskService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar) {
@@ -28,6 +32,11 @@ export class TaskIndexComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.setViewModel();
+
+    this.mediaSubscription = this.media.media$
+      .subscribe(mediaChange => {
+        this.isXsDisplay = mediaChange.mqAlias == "xs";
+      });
     
     this.taskChangedSubscription = this.appEventService
       .taskChanged
@@ -37,33 +46,8 @@ export class TaskIndexComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
+    this.mediaSubscription.unsubscribe();
     this.taskChangedSubscription.unsubscribe();
-  }
-
-  public completeTaskClicked(taskId: number): void {
-    this.dialog
-      .open(DialogConfirmComponent, {
-        data: { 
-          message: "Are you sure you want to complete this task?"
-        }
-      })
-      .afterClosed()
-      .subscribe((result: Boolean) => {
-        if (result) {
-          this.taskService
-            .completeTask(taskId)
-            .subscribe(() => {
-              this.appEventService.taskChanged.next({
-                id: taskId,
-                type: AppEventChangeType.Delete
-              });
-              this.snackBar.open('Task Completed', "", {
-                duration: 3000
-              });
-              this.setViewModel();
-            });
-        }
-      });
   }
 
   public deleteTaskClicked(taskId: number): void {

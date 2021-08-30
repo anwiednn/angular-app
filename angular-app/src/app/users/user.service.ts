@@ -99,8 +99,7 @@ export class UserService {
     }
 
     if (predicateModel.searchText) {
-      queryOptions += `&name_like=${predicateModel.searchText}`;
-      queryOptions += `&email_like=${predicateModel.searchText}`;
+      queryOptions += `&q=${predicateModel.searchText}`;
     }
     
     return forkJoin({

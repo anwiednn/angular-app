@@ -51,7 +51,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 
     this.userService
       .updateUser(this.viewModel.id, updateModel)
-      .subscribe(() => {                
+      .subscribe(() => {            
         this.appEventService.userChanged
           .next({
             id: this.viewModel.id,
