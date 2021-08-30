@@ -8,32 +8,47 @@
         </mat-form-field>
         <button mat-icon-button
                 routerLink="create">
-            <mat-icon>add_task</mat-icon>
+            <mat-icon>add</mat-icon>
         </button>
     </mat-card>
     <router-outlet></router-outlet>
-    <mat-grid-list class="mb-2" cols="4" rowHeight="125px">
-        <mat-grid-tile *ngFor="let task of viewModel.page.tasks">            
-            <mat-card fxFlexFill
-                [routerLink]="['detail', task.id]">
-                <mat-card-content>
-                    {{task.name}}
-                    {{task.reminderDate | date}}
-                    {{task.userName}}
-                    <p *ngIf="task.notes">
-                        {{task.notes}}
-                    </p>
-                </mat-card-content>
-                <mat-card-actions>
-                    <button mat-mini-fab
-                            color="warn"
-                            (click)="deleteTaskClicked(task.id, $event)">
-                        <mat-icon>delete</mat-icon>
-                    </button>
-                </mat-card-actions>
-                </mat-card>
-        </mat-grid-tile>
-      </mat-grid-list>
+    <div class="mb-2"
+        fxLayout="row"
+        fxLayoutGap="10px"
+        fxLayout.xs="column">            
+        <mat-card
+            fxLayout="column"
+            fxFlex="25%"
+            fxFlex.sm="50%"
+            *ngFor="let task of viewModel.page.tasks">
+            <mat-card-subtitle>
+                {{task.userName}}
+                <span fxFlex></span>
+                {{task.reminderDate | date}}
+            </mat-card-subtitle>
+            <mat-card-content fxFlex>
+                <strong>{{task.name}}</strong>
+                <p *ngIf="task.notes">
+                    {{task.notes}}
+                </p>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-icon-button>
+                    <mat-icon>done</mat-icon>
+                </button>
+                <span fxFlex></span>
+                <button mat-icon-button
+                        [routerLink]="['detail', task.id]">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button
+                        color="warn"
+                        (click)="deleteTaskClicked(task.id, $event)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
     <mat-card class="p-0">
         <mat-paginator 
             [length]="viewModel.page.total"
