@@ -45,4 +45,4 @@ testem.log
 Thumbs.db
 
 #Custom
-/fake-db/db.json
+/dev-db/db.json
