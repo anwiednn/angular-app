@@ -1,1 +1,68 @@
-# angular-app
+# Angular App 
+
+Angular App is a simple application allowing the user to manage tasks and users.
+
+It is a Single-Page App (SPA) written in standard web technologies [HTML5](http://whatwg.org/html), [SCSS](http://sass-lang.com) and [TypeScript](http://www.typescriptlang.org). It leverages the popular [Angular](https://angular.io/) framework and [Angular Material](https://material.angular.io/) for material design components.
+
+## Getting started using
+
+Please fine the GIT repository here: https://github.com/anwiednn/angular-app.git
+
+## Getting started developing
+
+1. Ensure you have the following installed in your system:
+
+    [`git`](https://git-scm.com/downloads)
+
+    [`npm`](https://nodejs.org/en/download/)
+
+2. Install [angular-cli](https://github.com/angular/angular-cli) globally.
+```
+npm install -g @angular/cli@~12.2.1
+```
+
+3. Clone the project locally into your system.
+```
+git clone https://github.com/anwiednn/angular-app.git
+```
+
+4. `cd` into project root directory and make sure you are on the master branch.
+
+5. Install the dependencies.
+```
+npm install
+```
+
+6. To preview the app, run the following command and navigate to `http://localhost:4200/`.
+```
+npm run json-server
+ng serve
+```
+
+### Development server
+
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+### Build
+
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory
+
+### Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the
+[Angular-CLI README](https://github.com/angular/angular-cli).
+
+
+<!-- ### Docker
+
+
+To locally build this Docker image from source (after `git clone` this repo), run:
+```
+docker build -t openmf/web-app:latest .
+```
+You can then run a Docker Container from the image above like this:
+```
+docker run -d -p 4200:80 openmf/web-app:latest
+```
+
+Access the webapp on http://localhost:4200 in your browser. -->
