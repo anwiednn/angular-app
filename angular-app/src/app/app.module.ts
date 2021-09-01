@@ -29,7 +29,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
       }, {
         path: "users",
         loadChildren: () => import("./users/user.module").then(m => m.UserModule)
-      }])
+      }, {
+        path: "**",
+        redirectTo: "/tasks"
+    }])
   ],
   providers: [],
   bootstrap: [
