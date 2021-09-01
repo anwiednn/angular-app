@@ -76,9 +76,11 @@ It is a Single-Page App (SPA) written in standard web technologies [HTML5](http:
     http://localhost:8080
     ```
 
+    This application served was build using `ng build`. This is a production version of the application.
+
 5. Usage of JSON-Server (Fake API)
 
-    The fake API only provides limited CRUD abilities.
+    The fake API only provides limited CRUD abilities and reduces application performances due latency of fake API used.
 
     Please see [`current limitations here`](https://my-json-server.typicode.com/#limits)
 
