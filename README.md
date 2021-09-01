@@ -79,7 +79,9 @@ It is a Single-Page App (SPA) written in standard web technologies [HTML5](http:
 5. Usage of JSON-Server (Fake API)
 
     The fake API only provides limited CRUD abilities.
+
     Please see [`current limitations here`](https://my-json-server.typicode.com/#limits)
+    
     Please see [`fake API used here`](https://my-json-server.typicode.com/anwiednn/angular-app-db)
 
 ## Getting started developing
