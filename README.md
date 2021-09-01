@@ -42,6 +42,7 @@ It is a Single-Page App (SPA) written in standard web technologies [HTML5](http:
     ```
 
 6. To preview the app, run the following commands and navigate to `http://localhost:4200/`.
+    JSON Server (Fake API) will run on `http://localhost:3000/`
     ```
     npm run json-server
     ```
