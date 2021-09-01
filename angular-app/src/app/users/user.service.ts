@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from 'src/environments/environment';
 import { forkJoin, Observable } from 'rxjs';
 import { map } from "rxjs/operators";
-import { User } from '../../fake-db/user';
+import { User } from 'dev-db/user';
 import { UserCreateModel } from './create/user-create-model';
 import { UserUpdateModel } from './detail/user-update-model';
 import { UserIndexViewModel, UserIndexViewModel_PageModel, UserIndexViewModel_PageModel_UserModel, UserIndexViewModel_PredicateModel } from './index/user-index-view-model';
