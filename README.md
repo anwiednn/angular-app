@@ -68,7 +68,7 @@ It is a Single-Page App (SPA) written in standard web technologies [HTML5](http:
 
 3. Run docker image
     ```
-    docker run --name angular-app -rm -p 8080:80 anwiednn/angular-app
+    docker run --name angular-app --rm -p 8080:80 anwiednn/angular-app
     ```
 
 4. Access the webapp on `http://localhost:8080` in your browser
@@ -81,7 +81,7 @@ It is a Single-Page App (SPA) written in standard web technologies [HTML5](http:
     The fake API only provides limited CRUD abilities.
 
     Please see [`current limitations here`](https://my-json-server.typicode.com/#limits)
-    
+
     Please see [`fake API used here`](https://my-json-server.typicode.com/anwiednn/angular-app-db)
 
 ## Getting started developing
