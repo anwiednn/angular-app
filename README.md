@@ -6,7 +6,7 @@ It s a simple demo application allowing the user to manage tasks and users.
 
 It is a Single-Page App (SPA) written in standard web technologies [HTML5](http://whatwg.org/html), [SCSS](http://sass-lang.com) and [TypeScript](http://www.typescriptlang.org). It leverages the popular [Angular](https://angular.io/) framework and [Angular Material](https://material.angular.io/) for material design components and [JSON Server (Fake API)](https://www.npmjs.com/package/json-server)
 
-## Getting app running (`ng serve`)
+## Getting app running (using `ng serve`)
 
 1. Ensure you have the following installed in your system:
 
@@ -53,7 +53,7 @@ It is a Single-Page App (SPA) written in standard web technologies [HTML5](http:
     ng serve
     ```
     
-## Getting app running (using Docker Image)
+## Getting app running (using `Docker Image`)
 
 1. Ensure you have the following installed in your system:
 
@@ -77,6 +77,7 @@ It is a Single-Page App (SPA) written in standard web technologies [HTML5](http:
     ```
 
 5. Usage of JSON-Server (Fake API)
+
     The fake API only provides limited CRUD abilities.
     Please see [`current limitations here`](https://my-json-server.typicode.com/#limits)
     Please see [`fake API used here`](https://my-json-server.typicode.com/anwiednn/angular-app-db)
