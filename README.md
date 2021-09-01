@@ -6,21 +6,22 @@ It s a simple demo application allowing the user to manage tasks and users.
 
 It is a Single-Page App (SPA) written in standard web technologies [HTML5](http://whatwg.org/html), [SCSS](http://sass-lang.com) and [TypeScript](http://www.typescriptlang.org). It leverages the popular [Angular](https://angular.io/) framework and [Angular Material](https://material.angular.io/) for material design components.
 
-## Getting started using
-
-Please fine the GIT repository here: https://github.com/anwiednn/angular-app.git
-
 ## Getting started developing
 
 1. Ensure you have the following installed in your system:
 
     [`git`](https://git-scm.com/downloads)
-
     [`npm`](https://nodejs.org/en/download/)
 
-2. Install [angular-cli](https://github.com/angular/angular-cli) globally.
+2. Install [angular-cli](https://github.com/angular/angular-cli)
+Locally
 ```
-npm install -g @angular/cli@~12.2.1
+npm install @angular/cli@12.2.1
+```
+
+ OR Globally
+```
+npm install -g @angular/cli@12.2.1
 ```
 
 3. Clone the project locally into your system.
@@ -35,9 +36,11 @@ git clone https://github.com/anwiednn/angular-app.git
 npm install
 ```
 
-6. To preview the app, run the following command and navigate to `http://localhost:4200/`.
+6. To preview the app, run the following commands and navigate to `http://localhost:4200/`.
 ```
 npm run json-server
+```
+```
 ng serve
 ```
 
