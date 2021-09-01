@@ -11,15 +11,16 @@ It is a Single-Page App (SPA) written in standard web technologies [HTML5](http:
 1. Ensure you have the following installed in your system:
 
     [`git`](https://git-scm.com/downloads)
+    
     [`npm`](https://nodejs.org/en/download/)
 
 2. Install [angular-cli](https://github.com/angular/angular-cli)
-Locally
+ - Locally
 ```
 npm install @angular/cli@12.2.1
 ```
 
- OR Globally
+ - Globallyc
 ```
 npm install -g @angular/cli@12.2.1
 ```
